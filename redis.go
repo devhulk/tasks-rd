@@ -10,7 +10,7 @@ import (
 
 func rdInit() *redis.Client {
 	client := redis.NewClient(&redis.Options{
-		Addr:     os.Getenv("REDISHOST"),
+		Addr:     fmt.Sprintf("%s:%s", os.Getenv("REDISHOST"), os.Getenv("REDISPORT")),
 		Password: os.Getenv("REDISPASSWORD"),
 		DB:       0,
 	})
