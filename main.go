@@ -19,10 +19,14 @@ func getPort() string {
 
 func main() {
 	app := fiber.New()
+	redis := rdInit()
 
 	app.Get("/", func(c *fiber.Ctx) error {
+		setKey(redis, "test_key", "value")
+		message := getKey(redis, "test_key")
+
 		return c.JSON(fiber.Map{
-			"message": "Hello, Railway!",
+			"message": message,
 		})
 	})
 
